@@ -1552,7 +1552,7 @@ my.directive("passwordVerify", function () {
                         var origin = scope.passwordVerify;
                         if (origin !== viewValue) {
                             ctrl.$setValidity("passwordVerify", false);
-                            return undefined;
+                            return false;
                         } else {
                             ctrl.$setValidity("passwordVerify", true);
                             return viewValue;
