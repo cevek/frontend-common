@@ -1,0 +1,9 @@
+{
+  "name": "vendor",
+  "version": "0.0.0",
+  "homepage": "https://github.com/cevek/frontend-common",
+  "authors": [
+    "cody <cevek@ya.ru>"
+  ],
+  "license": "MIT"
+}
