@@ -82,7 +82,8 @@ my.filter('startFrom', [function () {
 
 my.filter('timeago', ["$filter", "$locale", function ($filter, $locale) {
     return function (input) {
-        var diff = new Date() - new Date(input * 1);
+
+        var diff = new Date() - new Date(input);
         var seconds = Math.round(diff / 1000);
         var minutes = Math.round(seconds / 60);
         var hours = Math.round(minutes / 60);
@@ -90,22 +91,23 @@ my.filter('timeago', ["$filter", "$locale", function ($filter, $locale) {
         var months = Math.round(days / 30);
         var years = Math.round(days / 365);
 
+
         function plural(n, obj) {
             var s = obj[$locale.pluralCat(n)];
             return s.replace("{}", n);
         }
 
-        var s = seconds < 45 && i18n.datetime.minute.lessThan ||
-            seconds < 90 && i18n.datetime.minute[1] ||
-            minutes < 45 && plural(minutes, i18n.datetime.minute) ||
-            minutes < 90 && i18n.datetime.hour[1] ||
-            hours < 24 && plural(hours, i18n.datetime.hour) ||
-            hours < 42 && i18n.datetime.day[1] ||
-            days < 30 && plural(days, i18n.datetime.day) ||
-            days < 45 && i18n.datetime.month[1] ||
-            days < 365 && plural(months, i18n.datetime.month) ||
-            years < 1.5 && i18n.datetime.year[1] ||
-            plural(years, i18n.datetime.year);
+        var s = seconds < 45 && i18n.__timeago.minute.lessThan ||
+            seconds < 90 && i18n.__timeago.minute[1] ||
+            minutes < 45 && plural(minutes, i18n.__timeago.minute) ||
+            minutes < 90 && i18n.__timeago.hour[1] ||
+            hours < 24 && plural(hours, i18n.__timeago.hour) ||
+            hours < 42 && i18n.__timeago.day[1] ||
+            days < 30 && plural(days, i18n.__timeago.day) ||
+            days < 45 && i18n.__timeago.month[1] ||
+            days < 365 && plural(months, i18n.__timeago.month) ||
+            years < 1.5 && i18n.__timeago.year[1] ||
+            plural(years, i18n.__timeago.year);
 
         return s;
     }
