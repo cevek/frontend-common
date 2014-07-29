@@ -1237,7 +1237,7 @@ my.directive('imageUploader', function (growl, File) {
         </label>\
         <label ng-hide="hideAddButton" class="add_button square_button">\
             <span class="button_label"></span>\
-            <input style="position: absolute; left: -1000px;"  multiple accept="image/*" type="file" ng-model="file[$index]"/>\
+            <input style="position: absolute; left: -100000px;"  multiple accept="image/*" type="file" ng-model="file[$index]"/>\
         </label>\
     </div>',
         scope: {
