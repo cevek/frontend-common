@@ -1247,10 +1247,16 @@ my.directive('imageUploader', function (growl, File) {
         },
         controller: function ($scope, $attrs) {
             $scope.limit = $scope.limit || 10;
-            $scope.imgList = [];
 
             $scope.singleMod = $scope.limit == 1;
-            $scope.$watch('imgList', function () {
+
+
+            if ($scope.singleMod)
+                $scope.imgList = $scope.images ? [$scope.images] : [];
+            else
+                $scope.imgList = $scope.images.slice();
+
+            $scope.$watchCollection('imgList', function () {
                 if ($scope.singleMod)
                     $scope.images = $scope.imgList[0];
                 else
@@ -1258,8 +1264,8 @@ my.directive('imageUploader', function (growl, File) {
             });
 
 
-            if (!($scope.imgList instanceof Array))
-                $scope.imgList = [];
+            /* if (!($scope.imgList instanceof Array))
+             $scope.imgList = [];*/
 
             $scope.useActiveImage = typeof $attrs.activeImage != 'undefined';
 
@@ -1280,6 +1286,8 @@ my.directive('imageUploader', function (growl, File) {
                     $scope.$apply();
                 return !$scope.hideAddButton;
             }
+
+            checkCount();
 
             $scope.selectFile = this.selectFile = function (files) {
                 console.log(files);
