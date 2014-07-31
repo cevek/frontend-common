@@ -291,6 +291,11 @@ Array.prototype.findObject = function (property, value, returnIndex) {
     }
     return returnIndex ? -1 : false;
 };
+Object.defineProperty(Array.prototype, 'findObject', {
+    enumerable: false,
+    configurable: true,
+    writable: true
+});
 
 Array.prototype.findAllObject = function (property, value, limit) {
     var compare_obj = {}, i, prop, len, find;
@@ -321,7 +326,7 @@ Array.prototype.findAllObject = function (property, value, limit) {
     return ret;
 };
 
-Object.defineProperty(Array.prototype, 'findObject', {
+Object.defineProperty(Array.prototype, 'findAllObject', {
     enumerable: false,
     configurable: true,
     writable: true
