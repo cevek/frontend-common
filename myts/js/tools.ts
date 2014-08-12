@@ -23,7 +23,6 @@ interface Date {
     shiftFromUTC();
     toString();
 }
-;
 
 
 Object.getValFromPath = function (obj, key) {
