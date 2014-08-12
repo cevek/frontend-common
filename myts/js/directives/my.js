@@ -1522,7 +1522,7 @@ my.filter('youtubeThumb', function () {
     }
 });
 
-my.directive("likes", function (Like) {
+my.directive("likes", function () {
     return {
         restrict: "A",
         template: '<i class="icon-heart"></i> <span class="likes_num"></span>',

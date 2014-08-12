@@ -535,7 +535,7 @@ Object.autoIds = function (obj, prop, indexedObj) {
  */
 
 class Tools {
-    static classList(array, constructor) {
+    static classList<T>(array, constructor):T[] {
         if (!(array instanceof Array))
             array = [];
         for (var i = 0, l = array.length; i < l; i++) {

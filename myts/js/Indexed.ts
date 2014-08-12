@@ -5,15 +5,23 @@ class Index {}
 class IndexKey {
     constructor(public key:string, public many:boolean) {}
 }
+
 class IndexedArray<T> extends MyArray {
     keys:IndexKey[] = [];
 
-    constructor(array:T[], key = 'id', many = false) {
+    constructor(array:any, key = 'id', many = false) {
         super();
         for (var i = 0; i < array.length; i++) {
             this[i] = array[i];
         }
         this.length = array.length;
+        if (array.keys) {
+            this.keys = array.keys;
+            for (var i = 0; i < this.keys.length; i++) {
+                var indexKey:IndexKey = this.keys[i];
+                this[indexKey.key] = array[indexKey.key];
+            }
+        }
 
         this.setValToPath(this, key, {__proto__: new Index});
         this.keys.push(new IndexKey(key, many));
@@ -193,8 +201,6 @@ class IndexedArray<T> extends MyArray {
 
         _obj[keyChunks[keyChunks.length - 1]] = new_val;
         this.hidePrivate(obj, keyChunks[0]);
-        console.log(obj, keyChunks[0]);
-
     }
 
     private findObject(property, value):number {
