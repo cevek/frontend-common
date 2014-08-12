@@ -586,7 +586,6 @@ my.directive('spin', [function () {
             angular.extend(defaults, scope.config);
             var size = (defaults.width + defaults.length + defaults.radius) * 2;
             element.css({display: "inline-block", verticalAlign: "top", width: size + "px", height: size + "px"});
-            console.log(scope.config);
 
             new Spinner(defaults).spin(element[0]);
         }
@@ -1223,7 +1222,7 @@ my.directive('navTabs', function ($route, $location) {
 });
 
 
-my.directive('imageUploader', function (growl, File) {
+my.directive('imageUploader', function (growl) {
     return {
         template: '\
     <div dropfiles="selectFile(files)" class="upload_images">\
@@ -1309,7 +1308,7 @@ my.directive('imageUploader', function (growl, File) {
                         var reader = new FileReader();
                         reader.onload = function (e) {
                             if ($scope.limit > $scope.imgList.length) {
-                                var file = new File({file: htmlFile, url: e.target.result});
+                                var file = new MFile({file: htmlFile, url: e.target.result});
                                 $scope.imgList.push(file);
 
                                 checkCount();
