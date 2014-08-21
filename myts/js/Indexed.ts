@@ -30,6 +30,10 @@ class IndexedArray<T> extends MyArray {
         this.hidePrivates();
     }
 
+    get(key:string, value:string):any {
+        return this.getValFromPath(this, key)[value];
+    }
+
 
     updateAll() {
         var i:number, len:number, item:T, index_val:any;
