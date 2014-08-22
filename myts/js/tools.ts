@@ -415,13 +415,13 @@ interface Window {
     if (b.opr) {b.opera = true}
 
     b.ismobile = navigator.userAgent.match(/Android/i)
-        || navigator.userAgent.match(/webOS/i)
-        || navigator.userAgent.match(/iPhone/i)
-        || navigator.userAgent.match(/iPad/i)
-        || navigator.userAgent.match(/iPod/i)
-        || navigator.userAgent.match(/BlackBerry/i)
-        || navigator.userAgent.match(/Windows Phone/i)
-        || false;
+    || navigator.userAgent.match(/webOS/i)
+    || navigator.userAgent.match(/iPhone/i)
+    || navigator.userAgent.match(/iPad/i)
+    || navigator.userAgent.match(/iPod/i)
+    || navigator.userAgent.match(/BlackBerry/i)
+    || navigator.userAgent.match(/Windows Phone/i)
+    || false;
 
     window.browser = b;
 
@@ -545,6 +545,26 @@ class Tools {
             array.updateAll();
         return array;
     }
+
+    static toArray(array:any):Array<any> {
+        return array instanceof Array ? array : [];
+    }
+
+    static toString(s:any):string {
+        return typeof s === 'string' || !(typeof s !== 'number' || s !== s || s === Infinity || s === -Infinity) ? s + '' : '';
+    }
+
+    static toNumber(num:any):number {
+        num = typeof num === 'object' ? 0 : (num === true ? 1 : parseFloat(num));
+        return typeof num !== 'number' || num !== num || num === Infinity || num === -Infinity ? 0 : num;
+    }
+
+
+
+    static toBool(bool:any):boolean {
+        return !!bool;
+    }
+
 
     static generateNumbers(from, to) {
         var a = [];
