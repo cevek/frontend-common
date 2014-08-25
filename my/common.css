@@ -153,7 +153,12 @@ tabs, tab { display: block; }
 .width500 { width: 500px; }
 .width600 { width: 600px; }
 
+.width5p { width: 5%; }
+.width7p { width: 7%; }
+.width10p { width: 10%; }
+.width15p { width: 15%; }
 .width20p { width: 20%; }
+.width25p { width: 25%; }
 .width33p { width: 33%; }
 .width40p { width: 40%; }
 .width50p { width: 50%; }
