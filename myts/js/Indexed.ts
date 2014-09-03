@@ -1,4 +1,22 @@
-class MyArray {length:number}
+class MyArray<T> {
+    length:number;
+    public toString(): string{return''}
+    public toLocaleString(): string{return''}
+    concat(...items: T[]): T[]{return[]}
+    join(separator?: string): string{return''}
+    reverse(): T[]{return[]}
+    slice(start: number, end?: number): T[]{return[]}
+    sort(compareFn?: (a: T, b: T) => number): T[]{return[]}
+    indexOf(searchElement: T, fromIndex?: number): number{return 0}
+    lastIndexOf(searchElement: T, fromIndex?: number): number{return 0}
+    every(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): boolean{return null}
+    some(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): boolean{return null}
+    forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg?: any): void{return null}
+    map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: any): U[]{return[]}
+    filter(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: any): T[]{return[]}
+    reduce<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: T[]) => U, initialValue: U): U{return null}
+    reduceRight<U>(callbackfn: (previousValue: U, currentValue: T, currentIndex: number, array: T[]) => U, initialValue: U): U{return null}
+}
 MyArray.prototype = [];
 
 class Index {}
@@ -6,7 +24,7 @@ class IndexKey {
     constructor(public key:string, public many:boolean) {}
 }
 
-class IndexedArray<T> extends MyArray {
+class IndexedArray<T> extends MyArray<T> {
     keys:IndexKey[] = [];
 
     constructor(array:any, key = 'id', many = false) {
