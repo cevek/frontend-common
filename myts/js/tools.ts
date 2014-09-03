@@ -18,6 +18,7 @@ interface Date {
     getMonday();
     getDayInt();
     getDOY();
+    dayInt: number;
 
     shiftToUTC();
     shiftFromUTC();
@@ -293,6 +294,17 @@ Date.prototype.getMonday = function () {
 Date.prototype.getDayInt = function () {
     return this.getFullYear() * 10000 + this.getMonth() * 100 + this.getDate();
 };
+
+Object.defineProperty(Date.prototype, "dayInt", {
+    get: function () {
+        return this.getDayInt();
+    },
+    set: function (theBar) {
+
+    },
+    enumerable: true,
+    configurable: true
+});
 /**
  * Get day of year
  * @returns {number}
