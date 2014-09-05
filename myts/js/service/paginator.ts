@@ -87,7 +87,7 @@ angular.module("paginator", []).factory("Paginator", [function () {
             this.pagesCount = Math.ceil(this.itemsCount / this.perPage);
             this.generateList();
         }
-    }
+    };
 
     return Paginator;
 }]);
