@@ -21,6 +21,6 @@ angular.module("sorter", []).factory('Sorter', [function () {
         orderBy: function () {
             return (this.reverse ? "-" : "+") + this.predicate;
         }
-    }
+    };
     return Sorter;
 }]);

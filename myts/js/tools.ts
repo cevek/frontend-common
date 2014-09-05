@@ -1,7 +1,8 @@
 interface Array<T> {
     findObject(property, value, returnIndex);
     findAllObject(property, value, limit);
-    createIndex(key:string):any
+    createIndex(key:string):any;
+    joinNotNull(separator:string): string;
 }
 
 interface Object {
@@ -66,6 +67,21 @@ Object.setValToPath = function (obj, key, new_val) {
  * @param {number|object} item
  */
 
+
+
+Array.prototype.joinNotNull = function (separator) {
+    var list = [];
+    for (var i = 0; i < this.length; i++) {
+        if (typeof this[i] !== 'undefined' && this[i] !== null)
+            list.push(this[i]);
+    }
+    return list.join(separator);
+};
+Object.defineProperty(Array.prototype, 'joinNotNull', {
+    enumerable: false,
+    configurable: true,
+    writable: true
+});
 
 /**
  * @param {string|object} property
@@ -427,13 +443,13 @@ interface Window {
     if (b.opr) {b.opera = true}
 
     b.ismobile = navigator.userAgent.match(/Android/i)
-    || navigator.userAgent.match(/webOS/i)
-    || navigator.userAgent.match(/iPhone/i)
-    || navigator.userAgent.match(/iPad/i)
-    || navigator.userAgent.match(/iPod/i)
-    || navigator.userAgent.match(/BlackBerry/i)
-    || navigator.userAgent.match(/Windows Phone/i)
-    || false;
+        || navigator.userAgent.match(/webOS/i)
+        || navigator.userAgent.match(/iPhone/i)
+        || navigator.userAgent.match(/iPad/i)
+        || navigator.userAgent.match(/iPod/i)
+        || navigator.userAgent.match(/BlackBerry/i)
+        || navigator.userAgent.match(/Windows Phone/i)
+        || false;
 
     window.browser = b;
 
@@ -570,7 +586,6 @@ class Tools {
         num = typeof num === 'object' ? 0 : (num === true ? 1 : parseFloat(num));
         return typeof num !== 'number' || num !== num || num === Infinity || num === -Infinity ? 0 : num;
     }
-
 
 
     static toBool(bool:any):boolean {
