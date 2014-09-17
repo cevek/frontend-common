@@ -1574,3 +1574,32 @@ my.directive("passwordVerify", function () {
     };
 });
 
+
+my.directive("phoneNumber", function () {
+        return {
+            link: function (scope, el, attrs) {
+                var m = '(000) 000-0#';
+                var options =  {placeholder: "+_ (___) ___-____", maxlength: false, onKeyPress: function(cep){
+                    cep = cep.replace(/\D/g, '');
+                    var masks = ['+0 '+m, '+00 '+m, '+000 '+m];
+                    var defs = [
+                        /^([178])/,
+                        /^(2[078]|3[0123469]|4[013456789]|5[12345678]|6[0123456]|9[0123458])/,
+                        /^(2[1234569]|3[578]|42|5[09]|6[789]|9[679])\d/];
+
+                    var mask = m;
+                    if (cep.match(defs[0]))
+                        mask = masks[0];
+                    if (cep.match(defs[1]))
+                        mask = masks[1];
+                    if (cep.match(defs[2]))
+                        mask = masks[2];
+
+                    el.mask(mask, this);
+                }};
+
+                el.mask('+0 '+m, options);
+            }
+        }
+    }
+);
