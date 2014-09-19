@@ -25,7 +25,7 @@ class IndexKey {
 }
 
 class IndexedArray<T> extends MyArray<T> {
-    keys:IndexKey[] = [];
+    _keys:IndexKey[] = [];
 
     constructor(array:any, key = 'id', many = false) {
         super();
@@ -33,16 +33,16 @@ class IndexedArray<T> extends MyArray<T> {
             this[i] = array[i];
         }
         this.length = array.length;
-        if (array.keys) {
-            this.keys = array.keys;
-            for (var i = 0; i < this.keys.length; i++) {
-                var indexKey:IndexKey = this.keys[i];
+        if (array._keys) {
+            this._keys = array._keys;
+            for (var i = 0; i < this._keys.length; i++) {
+                var indexKey:IndexKey = this._keys[i];
                 this[indexKey.key] = array[indexKey.key];
             }
         }
 
         this.setValToPath(this, key, {__proto__: new Index});
-        this.keys.push(new IndexKey(key, many));
+        this._keys.push(new IndexKey(key, many));
         this.updateAll();
 
         this.hidePrivates();
@@ -56,9 +56,9 @@ class IndexedArray<T> extends MyArray<T> {
     updateAll() {
         var i:number, len:number, item:T, index_val:any;
 
-        for (var j = 0; j < this.keys.length; j++) {
-            var key = this.keys[j].key;
-            var many = this.keys[j].many;
+        for (var j = 0; j < this._keys.length; j++) {
+            var key = this._keys[j].key;
+            var many = this._keys[j].many;
 
 
             this.setValToPath(this, key, {__proto__: new Index});
@@ -91,9 +91,9 @@ class IndexedArray<T> extends MyArray<T> {
     updateItem(item:T) {
         var i;
 
-        for (var j = 0; j < this.keys.length; j++) {
-            var key = this.keys[j].key;
-            var many = this.keys[j].many;
+        for (var j = 0; j < this._keys.length; j++) {
+            var key = this._keys[j].key;
+            var many = this._keys[j].many;
             var index = this.getValFromPath(this, key);
 
 
@@ -129,8 +129,8 @@ class IndexedArray<T> extends MyArray<T> {
 
     removeItem(item:T) {
         var i;
-        for (var j = 0; j < this.keys.length; j++) {
-            var key = this.keys[j].key;
+        for (var j = 0; j < this._keys.length; j++) {
+            var key = this._keys[j].key;
             if (typeof item === 'object') {
                 i = this.findObject(key, this.getValFromPath(item, key));
             }
@@ -174,9 +174,9 @@ class IndexedArray<T> extends MyArray<T> {
 
     splice(from:number, howMany:number) {
         var i, k, item, index_val;
-        for (var j = 0; j < this.keys.length; j++) {
-            var key = this.keys[j].key;
-            var many = this.keys[j].many;
+        for (var j = 0; j < this._keys.length; j++) {
+            var key = this._keys[j].key;
+            var many = this._keys[j].many;
             var index = this.getValFromPath(this, key);
             for (i = 0; i < howMany; i++) {
                 k = from + i;
@@ -249,11 +249,11 @@ class IndexedArray<T> extends MyArray<T> {
     }
 
     private hidePrivates() {
-        var keys = Object.keys(IndexedArray.prototype);
-        for (var i = 0; i < keys.length; i++) {
-            this.hidePrivate(IndexedArray.prototype, keys[i]);
+        var _keys = Object.keys(IndexedArray.prototype);
+        for (var i = 0; i < _keys.length; i++) {
+            this.hidePrivate(IndexedArray.prototype, _keys[i]);
         }
-        this.hidePrivate(this, "keys");
+        this.hidePrivate(this, "_keys");
         this.hidePrivate(this, "length");
     }
 
