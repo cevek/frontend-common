@@ -1533,7 +1533,7 @@ my.directive("likes", function () {
             $likesNum.text(obj.likes);
             elem.toggleClass("active", Like.isMy(obj));
             elem.addClass("likes").click(function () {
-                Like(obj).then(function (data) {
+                Like.setLike(obj).then(function (data) {
                     elem.toggleClass("active", data.is_like);
                     $likesNum.text(data.likes);
                 });
