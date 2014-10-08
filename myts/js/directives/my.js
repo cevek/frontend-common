@@ -1530,14 +1530,16 @@ my.directive("likes", function () {
 
             var $likesNum = elem.find(".likes_num");
             var obj = scope.$eval(attrs.likes);
-            $likesNum.text(obj.likes);
-            elem.toggleClass("active", Like.isMy(obj));
-            elem.addClass("likes").click(function () {
-                Like.setLike(obj).then(function (data) {
-                    elem.toggleClass("active", data.is_like);
-                    $likesNum.text(data.likes);
+            if (obj) {
+                $likesNum.text(obj.likes);
+                elem.toggleClass("active", Like.isMy(obj));
+                elem.addClass("likes").click(function () {
+                    Like.setLike(obj).then(function (data) {
+                        elem.toggleClass("active", data.is_like);
+                        $likesNum.text(data.likes);
+                    });
                 });
-            });
+            }
         }
     }
 });
